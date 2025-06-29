@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Task Manager</h1>
+<a href="/create" class="btn btn-primary">Create New Task</a>
+<form method="get" class="my-2">
+  <input type="text" name="query" placeholder="Search by Title or Status">
+  <button type="submit" class="btn btn-outline-primary">Search</button>
+</form>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Status</th>
+      <th>Due Date</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for task in tasks %}
+    <tr>
+      <td>{{ task.title }}</td>
+      <td>{{ task.status }}</td>
+      <td>{{ task.due_date.date() }}</td>
+      <td>
+        <a href="/edit/{{ task.id }}" class="btn btn-sm btn-warning">Edit</a>
+        <a href="/delete/{{ task.id }}" class="btn btn-sm btn-danger">Delete</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
